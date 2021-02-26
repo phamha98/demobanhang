@@ -1,9 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
-import Login from '../../source/screen/Login'
-import Home from '../../source/screen/Home'
-import Test from '../../source/screen/test'
+import Login from '../screen/Login'
+import Register from '../screen/Register'
+import DrawerScreen from './Drawer'
+
 const Stack =createStackNavigator();
 function Navigation(){
 return(
@@ -11,8 +12,8 @@ return(
 <Stack.Navigator initialRouteName="Login"
   screenOptions={{headerShown: false}}>
 <Stack.Screen name="Login" component={Login}/>
-<Stack.Screen name="Home" component={Home}/>
-<Stack.Screen name="Test" component={Test}/>
+<Stack.Screen name="Drawer" component={DrawerScreen}/>
+<Stack.Screen name="Registers" component={Register}/>
 </Stack.Navigator>
 </NavigationContainer>
 )
