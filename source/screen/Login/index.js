@@ -24,11 +24,11 @@ export default function Login({ navigation }) {
 
   const dangnhap = () => {
     if (user.trim() === "") {
-      return Alert.alert("Trường tài khoản không được để trống");
+      return Alert.alert("Tài khoản không được để trống");
     }
 
     if (password.trim() === "") {
-      return Alert.alert("Trường mật khẩu không được để trống");
+      return Alert.alert("Mật khẩu không được để trống");
     }
 
     if (user !== Users.username || password !== Users.password) {
