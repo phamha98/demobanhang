@@ -4,6 +4,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#b49d55",
   },
+  imageBackground: {
+    resizeMode: "contain",
+    flex: 1,
+  },
   textItem: {
     color: "red",
     fontSize: 30,
@@ -41,9 +45,9 @@ const styles = StyleSheet.create({
   viewContent: {
     backgroundColor: "#fff",
     width: "100%",
-    height: 230,
+    height: 240,
     alignItems: "center",
-    borderRadius: 15,
+    borderRadius: 10,
     overflow: "hidden",
     padding: 5,
   },
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  
 });
 
 export default styles;

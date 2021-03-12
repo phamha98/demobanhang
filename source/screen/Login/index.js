@@ -23,26 +23,26 @@ export default function Login({ navigation }) {
   const [password, setpassword] = useState("");
 
   const dangnhap = () => {
-    if (user.trim() === "") {
-      return Alert.alert("Tài khoản không được để trống");
-    }
+    // if (user.trim() === "") {
+    //   return Alert.alert("Tài khoản không được để trống");
+    // }
 
-    if (password.trim() === "") {
-      return Alert.alert("Mật khẩu không được để trống");
-    }
+    // if (password.trim() === "") {
+    //   return Alert.alert("Mật khẩu không được để trống");
+    // }
 
-    if (user !== Users.username || password !== Users.password) {
-      return Alert.alert("Tài khoản hoặc mật khẩu không đúng");
-    }
+    // if (user !== Users.username || password !== Users.password) {
+    //   return Alert.alert("Tài khoản hoặc mật khẩu không đúng");
+    // }
 
     navigation.replace("Drawer");
-    //Stack{Login:Regiter:Drawer[TabHome(HomeScreen,Setting,Person,Favorite);Notification;Logout;Help]}
+     
   };
   const handleDangky = () => {
     return navigation.navigate("Registers");
   };
   const textDangky = useState("Đăng ký");
-  const [statePass, setStatePass] = useState(false);
+  const [statePass, setStatePass] = useState(true);
   const hindePass = () => {
     setStatePass(!statePass);
   };

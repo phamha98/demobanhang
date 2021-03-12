@@ -10,7 +10,7 @@ function Header({ title, onBack, navigation }) {
           style={styles.backBtn}
           onPress={() => navigation.openDrawer()}
         >
-          <Ionicons name="menu-outline" size={35} color="#e42e7f"></Ionicons>
+          <Ionicons name="menu-outline" size={30} color="#10151c"></Ionicons>
           <Text style={styles.backText}>Menu</Text>
         </TouchableOpacity>
       );
@@ -23,7 +23,7 @@ function Header({ title, onBack, navigation }) {
             navigation.goBack();
           }}
         >
-          <Ionicons name="arrow-back-outline" size={35} color="#fe7302"></Ionicons>
+          <Ionicons name="arrow-back-outline" size={30} color="#10151c"></Ionicons>
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
       );
@@ -46,33 +46,35 @@ Header.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-     
-    height: 40,
-    backgroundColor: "#E1F09D",
+    //
+    height: 30,
+    marginHorizontal:10,
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 3,
-    flexDirection: "row",
-    borderBottomWidth: 1.5,
-    borderBottomColor: "#D349A9",
+    borderBottomWidth: 1,
+    borderBottomColor: "#1a3e6c",
     marginHorizontal:5,
-    borderRadius:7
+    borderRadius:3
   },
   title: {
-    fontSize: 22,
-    color: "#EE0251",
-    paddingLeft: 100,
+    fontSize: 20,
+    color: "#1a3e6c",
   },
   backBtn: {
     flex: 2,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft:5
+    paddingLeft:12,
+    position:'absolute',
+    top:0,
+    left:0
   },
   backText: {
-    fontSize: 20,
-    color: "green",
+    fontSize: 15,
+    color: "#1a3e6c",
   },
 });
 

@@ -11,31 +11,55 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from "react-native";
 import { Ionicons } from "react-native-vector-icons";
 import Products from "../../../service/Products";
 import Header from "../../../component/Header";
+import FormatMoney from '../../../Program/FormatMoney'
 
-function moneyFormat(price, sign = "VND") {
-  const pieces = parseFloat(price).toFixed(0).split(""); //phantach chuoi thaeo ki tu
-  let ii = pieces.length - 3; //toFixed:chuyen thanh chuoi giu lai thap phan()
-  while (ii > 0) {
-    pieces.splice(ii, 0, "."); //xoa 0 pt vt ii them vao .
-    ii -= 3; //1,234,567
+
+const ViewItem = ({ item, navigation }) => {
+  //const navigation = useNavigation();
+ 
+  const choiseColor = (a) => {
+    if (a === "Red") return "red";
+    if (a === "Multicoloured") return "red";
+    if (a === "Brown") return "brown";
+    if (a === "White") return "white";
+    if (a === "Anthracite grey") return "#343E40";
+
+    return "#000";
+  };
+  const backGround=(a)=>{
+    if (a === "White") return "gray";
+    if (a === "Multicoloured") return "yellow";
+    return 'white';
   }
-  return pieces.join("") + " " + sign;
-}
-
-const viewItem = ({ item }) => {
   return (
-    <TouchableOpacity style={styles.viewItem}>
+    <TouchableOpacity
+      style={styles.viewItem}
+      onPress={() => {
+        navigation.navigate("ProductDetail", { transData: item });
+      }} //
+    >
       <View style={styles.viewContent}>
         <Image source={{ uri: item.thumbImage }} style={styles.imageItem} />
         <View style={styles.viewText}>
-          <Text style={{fontWeight:'bold',fontSize:16,color:'#ff8003'}}>{item.name}</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 16,
+              color: "#ff8003",
+              textAlign: "center",
+            }}
+          >
+            {item.name}
+          </Text>
+
           <Text style={styles.price}>
             <Ionicons name="card-outline" color="#0632F7" size={16} />{" "}
-            {moneyFormat(item.price)}{" "}
+            {FormatMoney.moneyFormat(item.price)}{" "}
           </Text>
           <Text>
             Màu
@@ -44,7 +68,9 @@ const viewItem = ({ item }) => {
               color="#f70672"
               size={16}
             />{" "}
-            {item.colour}
+            <Text style={{ color: choiseColor(item.colour),backgroundColor:backGround(item.colour) }}>
+              {item.colour}
+              </Text>
           </Text>
         </View>
       </View>
@@ -57,11 +83,31 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        backgroundColor="#123E9C"
-        hidden={hidden} />
-      <Header title="Home" onBack="Home" navigation={navigation} />
-      <FlatList data={Products} renderItem={viewItem} numColumns={2} />
+      <ImageBackground
+        source={{
+          uri:
+            "https://img1.kienthucvui.vn/uploads/2019/10/27/hinh-nen-dien-thoai-android_111220873.jpg",
+        }}
+        style={styles.imageBackground}
+      >
+        <StatusBar backgroundColor="#123E9C" hidden={hidden} />
+        <Header title="Home" onBack="Home" navigation={navigation} />
+        {/* <Button title='click' }></Button> */}
+        <Button
+          title="Xem gio hang"
+          onPress={() => {
+            navigation.navigate("Order");
+          }}
+        />
+        <FlatList
+          data={Products}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ViewItem navigation={navigation} item={item}></ViewItem>
+          )}
+          numColumns={2}
+        ></FlatList>
+      </ImageBackground>
     </View>
   );
 }
