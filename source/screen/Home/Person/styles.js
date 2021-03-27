@@ -2,12 +2,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-     
   },
-  contentView: {
+  viewAvatar: {
     marginTop: 10,
     marginHorizontal: 5,
-    backgroundColor: "yellow",
+
     alignItems: "center",
   },
   avatar: {
@@ -17,37 +16,54 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: "red",
     overflow: "hidden",
-    borderWidth: 7,
+    borderWidth: 3,
     borderColor: "#fff",
   },
   add: {
-    backgroundColor: "#1878f3",
-    width: 300,
-    height: 50,
+    backgroundColor: "#37E23F",
+    width: 150,
+    height: 35,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    borderRadius: 8,
+    borderRadius: 20,
     flexDirection: "row",
   },
-  infomation: {
-    marginTop: 40,
-    backgroundColor: "#f1d77d",
+  viewInfomation: {
+    //backgroundColor: "#EBE4CA",
+    marginHorizontal: 5,
+    paddingHorizontal: 5,
+    paddingTop: 10,
+   
   },
-  fontAwesome: {
-    width: 350,
-    height: 30,
-    marginTop: 5,
-    borderBottomWidth: 1,
+  rowInfo: {
+    flexDirection: "row",
+    backgroundColor: "#DADBD2",
+    paddingHorizontal: 5,
+    marginVertical: 1,
+    alignItems: "center",
+    borderRadius:2
   },
-  textFont: {
-    fontSize: 20,
-    color: "#000",
-    paddingLeft: 20,
+  textInfo: {
+    paddingLeft: 10,
+    fontSize: 16,
+    color: "#31AACF",
   },
-  sign: {
+  viewLogout: {
+    marginHorizontal: 5,
+    alignItems: "center",
+    paddingTop: 50,
+    marginBottom: 20,
+  },
+  buttonLogout: {
+    width: 200,
     height: 35,
-    width: 250,
+    backgroundColor: "#0C79F5",
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: "#34D8D883",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

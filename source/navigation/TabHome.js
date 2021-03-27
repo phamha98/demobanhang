@@ -5,42 +5,22 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "react-native-vector-icons";
 import HomeScreen from "../screen/Home/HomeScreen";
 import Favorite from "../screen/Home/Favorite";
-import Setting from "../screen/Home/Setting";
-import Person from "../screen/Home/Person";
+import Person from "../screen/Home/Person/index";
+import Order from "../screen/Home/Order";
 import ProductDetail from "../screen/Home/ProductDetail";
-import Order from '../screen/Home/Order'
+
+import TabBar from '../component/TabBar'
 const Tab = createBottomTabNavigator();
 function TabHome({ navigation }) {
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === "HomeScreen") {
-            iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Favorite") {
-            iconName = focused ? "heart" : "heart-outline";
-          } else if (route.name === "Setting") {
-            iconName = focused ? "settings" : "settings-outline";
-          } else if (route.name === "Person") {
-            iconName = focused ? "person" : "person-outline";
-          }
-
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
-      }}
+      tabBar={(props) => <TabBar {...props} />}
     >
-      <Tab.Screen name="HomeScreen" component={HomeScreenParent} />
-      <Tab.Screen name="Favorite" component={Favorite} />
-      <Tab.Screen name="Setting" component={Setting} />
-      <Tab.Screen name="Person" component={Person} />
+      <Tab.Screen name="HomeScreen" component={HomeScreenParent} initialParams={{ icon: 'home',name:'Home' }} />
+      <Tab.Screen name="Favorite" component={Favorite} initialParams={{ icon: 'heart',name:'Favorite' }} />
+      <Tab.Screen name="Order" component={Order} initialParams={{ icon: 'cart',name:'Order' }} />
+      <Tab.Screen name="Person" component={Person}  initialParams={{ icon: 'person' ,name:'Person'}}/>
     </Tab.Navigator>
   );
 }
@@ -54,7 +34,7 @@ function HomeScreenParent({ navigation }) {
     >
       <StackHome.Screen name="HomeScreen" component={HomeScreen} />
       <StackHome.Screen name="ProductDetail" component={ProductDetail} />
-      <StackHome.Screen name="Order" component={Order} /> 
+      <StackHome.Screen name="Order" component={Order} />
     </StackHome.Navigator>
   );
 }

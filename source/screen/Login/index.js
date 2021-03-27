@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./styles";
+import React, { useState, useContext } from "react";
+import styles from "./style";
 import {
   Text,
   View,
@@ -17,12 +17,23 @@ import {
 } from "react-native";
 import Users from "../../service/Users";
 import { Ionicons } from "react-native-vector-icons";
+import { AppContext } from "../../AppContext";
 
 export default function Login({ navigation }) {
-  const [user, setuser] = useState("");
-  const [password, setpassword] = useState("");
-
-  const dangnhap = () => {
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const { acount, setAcount } = useContext(AppContext);
+  const test = () => {
+    const findAcount = Users.filter(
+      (item) => item.username === user && item.password === password
+    );
+    if (findAcount.length === 0) {
+      return false;
+    }
+    setAcount(findAcount[0]);
+    return true;
+  };
+  const handleLogin = () => {
     // if (user.trim() === "") {
     //   return Alert.alert("Tài khoản không được để trống");
     // }
@@ -30,114 +41,121 @@ export default function Login({ navigation }) {
     // if (password.trim() === "") {
     //   return Alert.alert("Mật khẩu không được để trống");
     // }
-
-    // if (user !== Users.username || password !== Users.password) {
+    // if (!test()) {
     //   return Alert.alert("Tài khoản hoặc mật khẩu không đúng");
     // }
 
     navigation.replace("Drawer");
-     
   };
-  const handleDangky = () => {
+  const handleRegister = () => {
     return navigation.navigate("Registers");
   };
-  const textDangky = useState("Đăng ký");
+  const handleForgot = () => {
+    return navigation.navigate("Forgot");
+  };
   const [statePass, setStatePass] = useState(true);
   const hindePass = () => {
     setStatePass(!statePass);
   };
+  const imageBackground = "../../../source/image/hinhnen.jpg";
   return (
-    <View style={styles.containerRoot}>
-      <ImageBackground
-        source={require("../../../source/image/hinhnen.jpg")}
-        style={{ flex: 1 }}
-      >
-        <ScrollView style={{ flex: 1 }}>
+    <View style={styles.container}>
+      <ImageBackground source={require(imageBackground)} style={{ flex: 1 }}>
+        <ScrollView>
           {/*<StatusBar hidden={!hidden} />*/}
-          <View style={styles.cont1Logo}>
+          <View style={styles.Logo}>
             <Image
               source={require("../../../source/image/logo1.png")}
               style={styles.imgLogo}
             />
           </View>
-          <View style={styles.cont2Input}>
-            <View style={styles.cont2User}>
-              <Image
-                source={require("../../../source/image/user.png")}
-                style={styles.imgUser}
+          <View style={styles.viewContent}>
+            <View style={styles.rowInput}>
+              <Ionicons
+                name="person"
+                size={30}
+                color="black"
+                style={{ position: "absolute", left:10 }}
               />
               <TextInput
-                style={styles.inputUser}
+                style={styles.textInput}
                 placeholder="Nhập vào tên đăng nhập"
                 value={user}
-                onChangeText={(text) => setuser(text)}
+                onChangeText={(text) => setUser(text)}
               />
             </View>
-            <View style={styles.cont2User}>
-              <Image
-                source={require("../../../source/image/pass.png")}
-                style={styles.imgUser}
+            <View style={styles.rowInput}>
+              <Ionicons
+                name="key"
+                size={30}
+                color="black"
+                style={{ position: "absolute", left:10 }}
               />
               <TextInput
-                style={styles.inputUser}
+                style={styles.textInput}
                 placeholder="Nhập vào mật khẩu"
                 secureTextEntry={statePass}
                 onSubmitEditing={Keyboard.dismiss}
-                onChangeText={(text) => setpassword(text)}
+                onChangeText={(text) => setPassword(text)}
                 value={password}
               />
               <Ionicons
                 onPress={hindePass}
-                style={styles.eye}
-                name={statePass?"eye-off-outline":"eye-outline"}
+                style={{ position: "absolute", right: 10 }}
+                name={statePass ? "eye-off-outline" : "eye-outline"}
                 color="gray"
                 size={28}
               ></Ionicons>
             </View>
-            <TouchableOpacity style={styles.buttonLogin} onPress={dangnhap}>
+            <TouchableOpacity style={styles.rowLogin} onPress={handleLogin}>
               <Text style={{ color: "#fff", fontSize: 20 }}>Đăng Nhập</Text>
             </TouchableOpacity>
-            <View style={styles.viewRegister}>
-              <Text style={styles.textRegiter} onPress={handleDangky}>
-                {textDangky}
-              </Text>
-              <Text style={styles.textForget}>Quên</Text>
+            <View style={styles.rowRegister}>
+              <TouchableOpacity onPress={handleRegister}>
+                <Text style={{ color: "#4684b3", fontSize: 15 }}>Đăng ký</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleForgot}>
+                <Text style={{ color: "#4684b3", fontSize: 15 }}>Quên</Text>
+              </TouchableOpacity>
             </View>
-          </View>
-          <View style={styles.cont3Loginwith}>
-            <TouchableOpacity
-              style={[styles.buttonLoginwith, { backgroundColor: "#fff" }]}
-            >
-              <Image
-                source={require("../../../source/image/google.png")}
-                style={styles.imgLoginwith}
+          
+          <TouchableOpacity
+            style={[styles.rowLink, { backgroundColor: "#fff" }]}
+          >
+             <Ionicons
+                name="logo-google"
+                size={20}
+                color="tomato"    
               />
-              <Text style={{ color: "#000" }}> Login with Google</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonLoginwith,
-                { backgroundColor: "#4267b2", borderColor: "#4267b2" },
-              ]}
-            >
-              <Image
-                source={require("../../../source/image/facebook.png")}
-                style={styles.imgLoginwith}
+            <Text style={{ color: "#000" }}> Login with Google</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            style={[
+              styles.rowLink,
+              { backgroundColor: "#4267b2", borderColor: "#4267b2" },
+            ]}
+          >
+            <Ionicons
+                name="logo-facebook"
+                size={20}
+                color="#fff"    
               />
-              <Text style={{ color: "#fff" }}> Login with Facebook</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonLoginwith,
-                { backgroundColor: "#CCCC99", borderColor: "#cd2893" },
-              ]}
-            >
-              <Image
-                source={require("../../../source/image/instagram.png")}
-                style={styles.imgLoginwith}
+            <Text style={{ color: "#fff" }}> Login with Facebook</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.rowLink,
+              { backgroundColor: "#CCCC99", borderColor: "#cd2893" },
+            ]}
+          >
+            <Ionicons
+                name="logo-instagram"
+                size={20}
+                color="black"    
               />
-              <Text style={{ color: "#000" }}> Login with Instagram</Text>
-            </TouchableOpacity>
+            <Text style={{ color: "#000" }}> Login with Instagram</Text>
+          </TouchableOpacity>
           </View>
         </ScrollView>
       </ImageBackground>

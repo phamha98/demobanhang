@@ -3,14 +3,17 @@ import { View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import TabHome from "./TabHome";
 import Login from "../screen/Login";
-import Person from '../screen/Home/Person'
-import Help from '../screen/Home/Help'
-import Notification from '../screen/Home/Notification'
-import Logout from '../screen/Home/Logout'
+import Person from "../screen/Home/Person";
+import Help from "../screen/Home/Help";
+import Notification from "../screen/Home/Notification";
+import Logout from "../screen/Home/Logout";
+import DrawerContent from '../component/Drawer'
 const Drawer = createDrawerNavigator();
-function DrawerScreen({navigation}) {
+function DrawerScreen({ navigation }) {
   return (
-    <Drawer.Navigator initialRouteName="HomeScreen">
+    <Drawer.Navigator
+    drawerContent={()=><DrawerContent navigation={navigation}/>}
+    initialRouteName="HomeScreen">
       <Drawer.Screen name="TabHome" component={TabHome} />
       <Drawer.Screen name="Person" component={Person} />
       <Drawer.Screen name="Notification" component={Notification} />

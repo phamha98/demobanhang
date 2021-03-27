@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import Navigation from "./source/navigation";
-import Context from "./source/Context";
+import { useLinkBuilder } from "@react-navigation/native";
+import {AppProvider} from './source/AppContext';
 export default function App() {
-  const [context, setContext] = useState([]);
+ //const [context, setContext] = useState([]);//tao ra kho du l
+ 
   return (
-    <Context.Provider value={[context, setContext]}>
+    <AppProvider>
       <Navigation />
-    </Context.Provider>
+    </AppProvider>
   );
 }
 // import { createContext } from 'react';
 // const StoreContext = createContext(null);
 // export default StoreContext;
-{
-  /* <Context.Provider value={[context,setContext]}>
-<Navigation/>
-</Context.Provider> */
-}
+ 
+//   /* <Context.Provider value={[context,setContext]}>
+// <Navigation/>
+// </Context.Provider> */
+// context: gia tri kho du ll
+//
+ 

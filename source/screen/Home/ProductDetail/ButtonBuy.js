@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 import { Icon, Avatar } from "react-native-elements";
+import { Ionicons } from "react-native-vector-icons";
 
 export default function ButtonBuy({ number, handleAdd, handleSub }) {
   if (number === 0)
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button1} onPress={handleAdd}>
-          <Icon name="add-circle" color="#FFF" />
-          <Text style={styles.text1}>Add to card</Text>
+        <TouchableOpacity style={styles.buttonFirt} onPress={handleAdd}>
+          <Icon name="add-circle" color="#E46613" />
+          <Text style={styles.textFirt}>Add to card</Text>
         </TouchableOpacity>
       </View>
     );
   if (number !== 0)
     return (
       <View style={styles.container}>
-        <View style={styles.view2}>
-          <TouchableOpacity style={styles.buttonAdd} onPress={handleAdd}>
-            <Text style={styles.textButton2}>ADD</Text>
+        <View style={styles.content}>
+          <TouchableOpacity style={[styles.buttonAdd, {  borderColor: "#CF0C26", }] }onPress={handleAdd}>
+            <Ionicons name="add-outline" size={25} color="#fff" />
           </TouchableOpacity>
-          <Text style={styles.text2}>{number}</Text>
-          <TouchableOpacity style={styles.buttonSub} onPress={handleSub}>
-            <Text style={styles.textButton2}>SUB</Text>
+          <View style={[styles.buttonAdd, { backgroundColor: "#fff", borderColor: "#fff", }]}>
+            <Text style={{ fontSize: 20 }}>{number}</Text>
+          </View>
+
+          <TouchableOpacity
+            style={[styles.buttonAdd, { backgroundColor: "#fff", borderColor: "gray", }]}
+            onPress={handleSub}
+          >
+            <Ionicons name="remove-outline" size={25} color="gray" />
           </TouchableOpacity>
         </View>
       </View>
@@ -29,55 +36,42 @@ export default function ButtonBuy({ number, handleAdd, handleSub }) {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
-    margin: 8,
-    backgroundColor:'#fff'
-  },
-  button1: {
-    backgroundColor: "#1878f3",
-    width: 300,
+    marginHorizontal:50,
+    backgroundColor: "#FFF",
     height: 40,
-    borderRadius: 7,
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopWidth:1,
+    borderTopColor:'#F12CC7'
+  },
+  content: {
+    flexDirection: "row",
+
+    alignItems: "center",
+  },
+  buttonFirt: {
+    backgroundColor: "#fff",
+    width: 150,
+    height: 30,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    flexDirection:'row'
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: "red",
   },
-  text1: {
-    color: "#fff",
+  textFirt: {
+    color: "#D87A0F",
     fontSize: 15,
     fontWeight: "bold",
   },
-  text2: {
-    color: "#000",
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-  textButton2: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-  view2: {
-    flexDirection: "row",
-    width: 300,
-    justifyContent: "space-between",
-  },
   buttonAdd: {
-    height: 40,
-    width: 80,
-    backgroundColor: "#1878f3",
+    width: 30,
+    backgroundColor: "#CF0C26",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 7,
-  
-  },
-  buttonSub: {
-    height: 40,
-    width: 80,
-    backgroundColor: "#1878f3",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 7,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: "black",
   },
 });
