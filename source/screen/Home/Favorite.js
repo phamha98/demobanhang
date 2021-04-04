@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useRef } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import Header from "../../component/Header";
 import { AppContext } from "../../AppContext";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
+import { Transition, Transitioning } from "react-native-reanimated";
 
 export default function Favorite({ navigation }) {
   const { theme,status, setStatus } = useContext(AppContext);
@@ -19,8 +20,28 @@ export default function Favorite({ navigation }) {
   const styleBox = () => {
     return theme.is ? theme.light.backgroundBox : theme.dark.backgroundBox;
   };
+  const transition = (
+    <Transition.Together>
+      <Transition.In
+        type="slide-top"
+        durationMs={400}
+        interpolation="easeOut"
+        propagation="bottom"
+      />
+      <Transition.Change />
+      <Transition.Out
+        type="slide-top"
+        durationMs={800}
+        interpolation="easeOut"
+        propagation="left"
+      />
+    </Transition.Together>
+  );
+  const ref = useRef();
   return (
-    <View style={[styles.container,{backgroundColor:styleBox()}]}>
+    <Transitioning.View style={[styles.container,{backgroundColor:styleBox()}]}
+    ref={ref}
+    transition={transition}>
       <Header title="Favorite" onBack="Back" navigation={navigation} />
       <ScrollView>
         <View style={{ alignItems: "center" }}>
@@ -33,6 +54,7 @@ export default function Favorite({ navigation }) {
             <TouchableOpacity
               style={[styles.content,{backgroundColor:theme.is?'#FFE8B6':'#6D55F7'}]}
               onLongPress={() => setShowAlert(true)}
+              key={index}
             >
               <AwesomeAlert
                 show={showAlert}
@@ -55,6 +77,7 @@ export default function Favorite({ navigation }) {
                   const newArray = status.filter(
                     (item) => item.name !== valueToRemove
                   );
+                  ref.current.animateNextTransition();
                   setStatus(newArray);
                   setShowAlert(false);
                 }}
@@ -70,6 +93,7 @@ export default function Favorite({ navigation }) {
                   const newArray = status.filter(
                     (item) => item.name !== valueToRemove
                   );
+                 // ref.current.animateNextTransition();
                   setStatus(newArray);
                   setShowAlert(false);
                 }}
@@ -84,7 +108,7 @@ export default function Favorite({ navigation }) {
           );
         })}
       </ScrollView>
-    </View>
+    </Transitioning.View>
   );
 }
 const styles = StyleSheet.create({

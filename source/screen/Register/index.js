@@ -3,7 +3,6 @@ import styles from "./style";
 import {
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   Image,
   Keyboard,
@@ -23,7 +22,6 @@ export default function Registers({ navigation }) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
-
   const [statePass, setStatePass] = useState(true);
   const hindePass = () => {
     setStatePass(!statePass);
@@ -33,7 +31,7 @@ export default function Registers({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={{ uri: imageBackground }} style={{ flex: 1 }}>
-        <ScrollView>
+        
           <View style={styles.Logo}>
             <Image
               source={require("../../../source/image/logo1.png")}
@@ -64,21 +62,14 @@ export default function Registers({ navigation }) {
               secureTextEntry={true}
               //onChangeText={(value) => this.setState({ comment: value })}
             />
-            {/* <Input
-            placeholder="INPUT WITH ERROR MESSAGE"
-            errorStyle={{ color: "red" }}
-            errorMessage="ENTER A VALID ERROR HERE"
-          /> */}
-
-          
             <Button
               icon={<Icon name="check-circle" size={25} color="white" />}
               iconRight
               title="Đăng kí thành viên  "
-              onPress={()=>alert('succeessfull')}
+              onPress={() => alert("succeessfull")}
             />
           </View>
-        </ScrollView>
+        
       </ImageBackground>
     </View>
   );

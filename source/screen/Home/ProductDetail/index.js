@@ -78,21 +78,24 @@ export default function ProductDetail({ route, navigation }) {
     setProduct({});
     navigation.navigate("HomeScreen");
   };
-  const handleStatus=()=>{
+  const handleStatus = () => {
     setIsColor(!isColor);
-    const findItem=status.find((item) => item.name=== data.name);
-    if(findItem) return ;
-    return setStatus((state) => 
-    {
+    const findItem = status.find((item) => item.name === data.name);
+    if (findItem) return;
+    return setStatus((state) => {
       return [...state, data];
-    })
-  }
-  
+    });
+  };
+  const dimensions = Dimensions.get("window");
+
   return (
     <View style={[styles.container, { backgroundColor: background() }]}>
       <Header title={data.name} onBack="Back" navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <TouchableOpacity  onPress={() => handleStatus()}>
+        {/* <TouchableOpacity
+          style={{ width: '100%', height: dimensions.width * 1.1 }}
+         // onLongPress={()=>handleStatus()}
+        > */}
           <FlatList
             horizontal={true}
             pagingEnabled={true}
@@ -103,7 +106,7 @@ export default function ProductDetail({ route, navigation }) {
               return <ViewImage uri={item}></ViewImage>;
             }}
           ></FlatList>
-        </TouchableOpacity>
+        {/* </TouchableOpacity> */}
         <View style={background()}>
           <ButtonBuy
             number={renderNumber()}

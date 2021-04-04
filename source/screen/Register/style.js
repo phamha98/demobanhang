@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   content: {
-    flex:1,
     paddingHorizontal:5,
     alignItems: "center",
   },

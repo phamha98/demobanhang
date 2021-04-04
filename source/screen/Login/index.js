@@ -34,16 +34,16 @@ export default function Login({ navigation }) {
     return true;
   };
   const handleLogin = () => {
-    // if (user.trim() === "") {
-    //   return Alert.alert("Tài khoản không được để trống");
-    // }
+    if (user.trim() === "") {
+      return Alert.alert("Tài khoản không được để trống");
+    }
 
-    // if (password.trim() === "") {
-    //   return Alert.alert("Mật khẩu không được để trống");
-    // }
-    // if (!test()) {
-    //   return Alert.alert("Tài khoản hoặc mật khẩu không đúng");
-    // }
+    if (password.trim() === "") {
+      return Alert.alert("Mật khẩu không được để trống");
+    }
+    if (!test()) {
+      return Alert.alert("Tài khoản hoặc mật khẩu không đúng");
+    }
 
     navigation.replace("Drawer");
   };
